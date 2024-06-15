@@ -11,7 +11,7 @@ const Index = () => {
   useEffect(() => {
     const checkTime = () => {
       const now = new Date();
-      if (now.getHours() === CLOSING_HOUR && now.getMinutes() === CLOSING_MINUTE && now.getSeconds() === 50) {
+      if (now.getHours() === CLOSING_HOUR && now.getMinutes() === CLOSING_MINUTE && now.getSeconds() === 35) {
         setIsModalOpen(true);
       }
     };
@@ -22,11 +22,13 @@ const Index = () => {
 
   useEffect(() => {
     if (isModalOpen) {
+      setCountdown(10); // Ensure countdown starts from 10 seconds
       const countdownInterval = setInterval(() => {
         setCountdown((prevCountdown) => {
           if (prevCountdown === 1) {
             clearInterval(countdownInterval);
             closeBoxYes();
+            setIsModalOpen(false); // Close the modal when countdown reaches zero
           }
           return prevCountdown - 1;
         });
